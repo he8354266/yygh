@@ -9,6 +9,8 @@ import com.atguigu.hospital.mapper.HospitalSetMapper;
 import com.atguigu.hospital.mapper.ScheduleMapper;
 import com.atguigu.hospital.model.HospitalSet;
 import com.atguigu.hospital.service.ApiService;
+import com.atguigu.hospital.util.HttpRequestHelper;
+import com.atguigu.hospital.util.YyghException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -16,6 +18,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -43,9 +46,15 @@ public class ApiServiceImpl implements ApiService {
         return hospitalSet.getHoscode();
     }
 
+    private String getApiUrl() {
+        HospitalSet hospitalSet = hospitalSetMapper.selectById(1);
+        return hospitalSet.getApiUrl();
+    }
+
     @Override
     public String getSignKey() {
-        return null;
+        HospitalSet hospitalSet = hospitalSetMapper.selectById(1);
+        return hospitalSet.getSignKey();
     }
 
     @Override
@@ -60,7 +69,23 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     public Map<String, Object> findDepartment(int pageNum, int pageSize) {
-        return null;
+        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("hoscode", this.getHoscode());
+        paramMap.put("page", pageNum);
+        paramMap.put("limit", pageSize);
+        paramMap.put("timestamp", HttpRequestHelper.getTimestamp());
+        paramMap.put("sign", HttpRequestHelper.getSign(paramMap, this.getSignKey()));
+        JSONObject response = HttpRequestHelper.sendRequest(paramMap, this.getApiUrl() + "/api/hosp/department/list");
+        if (response != null && response.getIntValue("code") == 200) {
+            JSONObject jsonObject = response.getJSONObject("data");
+            result.put("total", jsonObject.getLong("totalElements"));
+            result.put("pageNum", pageNum);
+            result.put("list", jsonObject.getJSONArray("content"));
+        } else {
+            throw new YyghException(response.getString("message"), 201);
+        }
+        return result;
     }
 
     @Override

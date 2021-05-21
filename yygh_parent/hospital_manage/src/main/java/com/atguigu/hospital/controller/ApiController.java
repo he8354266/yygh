@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -86,4 +87,24 @@ public class ApiController extends BaseController {
         return this.successPage(null, request);
     }
 
+    @RequestMapping("/department/list")
+    public String findDepartment(ModelMap model,
+                                 @RequestParam(defaultValue = "1") int pageNum,
+                                 @RequestParam(defaultValue = "10") int pageSize,
+                                 HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        try {
+            HospitalSet hospitalSet = hospitalSetMapper.selectById(1);
+            if (hospitalSet == null || StringUtils.isEmpty(hospitalSet.getHoscode())) {
+                this.failureMessage("先设置医院code与签名key", redirectAttributes);
+                return "redirect:/hospitalSet/index";
+            }
+            model.addAttribute(apiService.findDepartment(pageNum, pageSize));
+
+        } catch (YyghException e) {
+            this.failureMessage(e.getMessage(), request);
+        } catch (Exception e) {
+            this.failurePage("数据异常", request);
+        }
+        return "department/index";
+    }
 }
