@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/common/common.iml" filepath="$PROJECT_DIR$/yygh_parent/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/hospital_manage/hospital_manage.iml" filepath="$PROJECT_DIR$/yygh_parent/hospital_manage/hospital_manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/yygh.iml" filepath="$PROJECT_DIR$/.idea/yygh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/yygh_parent.iml" filepath="$PROJECT_DIR$/yygh_parent/yygh_parent.iml" />
+    </modules>
+  </component>
+</project>
