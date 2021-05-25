@@ -5,6 +5,8 @@
     <modules>
         <module>common</module>
         <module>hospital_manage</module>
+        <module>service</module>
+        <module>model</module>
     </modules>
 
     <parent>
