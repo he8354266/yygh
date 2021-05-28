@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
  * @updateDate 2021/5/25 10:32
  **/
 @Configuration
-
+@MapperScan("com.atguigu.yygh.hosp.mapper")
 public class HospConfig {
     /**
      * 分页插件

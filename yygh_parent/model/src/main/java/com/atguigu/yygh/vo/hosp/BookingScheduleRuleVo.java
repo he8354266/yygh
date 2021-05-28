@@ -20,7 +20,7 @@ public class BookingScheduleRuleVo {
 	
 	@ApiModelProperty(value = "可预约日期")
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date workDate;
+	private String workDate;
 
 	@ApiModelProperty(value = "可预约日期")
 	@JsonFormat(pattern = "MM月dd日")

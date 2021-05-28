@@ -44,7 +44,7 @@ public class Schedule extends BaseMongoEntity {
 
 	@ApiModelProperty(value = "排班日期")
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date workDate;
+	private String workDate;
 
 	@ApiModelProperty(value = "排班时间（0：上午 1：下午）")
 	private Integer workTime;
