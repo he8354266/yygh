@@ -7,6 +7,7 @@ package com.atguigu.yygh.hosp.controller;/**
 import com.atguigu.hospital.util.Result;
 import com.atguigu.yygh.hosp.service.ScheduleService;
 import com.atguigu.yygh.model.hosp.Schedule;
+import com.atguigu.yygh.vo.hosp.ScheduleOrderVo;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,4 +78,11 @@ public class ScheduleController {
         return Result.ok(bookingScheduleRule);
     }
 
+
+    @GetMapping("scheduleOrderVo/{scheduleId}")
+    public Result getScheduleOrderVo(
+            @PathVariable String scheduleId) throws ParseException {
+        ScheduleOrderVo scheduleOrderVo = scheduleService.getScheduleOrderVo(scheduleId);
+        return Result.ok(scheduleOrderVo);
+    }
 }

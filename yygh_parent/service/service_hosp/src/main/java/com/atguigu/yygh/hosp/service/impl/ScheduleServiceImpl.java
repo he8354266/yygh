@@ -395,11 +395,58 @@ public class ScheduleServiceImpl implements ScheduleService {
     //根据排班id获取预约下单数据
     @Override
     public ScheduleOrderVo getScheduleOrderVo(String scheduleId) {
-        return null;
+        ScheduleOrderVo scheduleOrderVo = new ScheduleOrderVo();
+        //获取排班信息
+        Schedule schedule = this.getScheduleId(scheduleId);
+        if (schedule == null) {
+            throw new YyghException(ResultCodeEnum.PARAM_ERROR);
+        }
+        //获取预约规则信息
+        Hospital hospital = hospitalService.getByHoscode(schedule.getHoscode());
+        if (hospital == null) {
+            throw new YyghException(ResultCodeEnum.PARAM_ERROR);
+        }
+        BookingRule bookingRule = hospital.getBookingRule();
+        if (bookingRule == null) {
+            throw new YyghException(ResultCodeEnum.PARAM_ERROR);
+        }
+
+        //把获取数据设置到scheduleOrderVo
+        scheduleOrderVo.setHoscode(schedule.getHoscode());
+        scheduleOrderVo.setHosname(hospitalService.getHospName(schedule.getHoscode()));
+        scheduleOrderVo.setDepcode(schedule.getDepcode());
+        scheduleOrderVo.setDepname(departmentService.getDepName(schedule.getHoscode(), schedule.getDepcode()));
+        scheduleOrderVo.setHosScheduleId(schedule.getHosScheduleId());
+        scheduleOrderVo.setAvailableNumber(schedule.getAvailableNumber());
+        scheduleOrderVo.setTitle(schedule.getTitle());
+        scheduleOrderVo.setReserveDate(schedule.getWorkDate());
+        scheduleOrderVo.setReserveTime(schedule.getWorkTime());
+        scheduleOrderVo.setAmount(schedule.getAmount());
+
+        //退号截止天数（如：就诊前一天为-1，当天为0）
+        Integer quitDay = bookingRule.getQuitDay();
+        DateTime quitTime = this.getDateTime(new DateTime(schedule.getWorkDate()).plusDays(quitDay).toDate(), bookingRule.getQuitTime());
+        scheduleOrderVo.setQuitTime(quitTime.toDate());
+
+
+        //预约开始时间
+        DateTime startTime = this.getDateTime(new Date(), bookingRule.getReleaseTime());
+        scheduleOrderVo.setStartTime(startTime.toDate());
+
+
+        //预约截止时间
+        DateTime endTime = this.getDateTime(new DateTime().plusDays(bookingRule.getCycle()).toDate(), bookingRule.getStopTime());
+        scheduleOrderVo.setEndTime(endTime.toDate());
+
+        //当天停止挂号时间
+        DateTime stopTime = this.getDateTime(new Date(), bookingRule.getStopTime());
+        scheduleOrderVo.setStopTime(stopTime.toDate());
+        return scheduleOrderVo;
     }
 
     @Override
     public void update(Schedule schedule) {
-
+        schedule.setUpdateTime(new Date());
+        mongoTemplate.save(schedule);
     }
 }

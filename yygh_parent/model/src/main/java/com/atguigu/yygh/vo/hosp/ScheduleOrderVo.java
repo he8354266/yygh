@@ -30,7 +30,7 @@ public class ScheduleOrderVo {
 	private String title;
 
 	@ApiModelProperty(value = "安排日期")
-	private Date reserveDate;
+	private String reserveDate;
 
 	@ApiModelProperty(value = "剩余预约数")
 	private Integer availableNumber;
