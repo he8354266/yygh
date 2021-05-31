@@ -4,6 +4,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/yygh_parent/pom.xml" />
+        <option value="$PROJECT_DIR$/yygh_parent/common/pom.xml" />
+        <option value="$PROJECT_DIR$/yygh_parent/common/rabbit_util/pom.xml" />
       </list>
     </option>
   </component>

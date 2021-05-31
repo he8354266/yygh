@@ -44,6 +44,11 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public Hospital getByHoscode(String hoscode) {
+        Criteria criteria = Criteria.where("hoscode").is(hoscode);
+        Hospital hospital = mongoTemplate.findOne(this.getQuery(criteria), Hospital.class);
+        if (hospital != null) {
+            return hospital;
+        }
         return null;
     }
 

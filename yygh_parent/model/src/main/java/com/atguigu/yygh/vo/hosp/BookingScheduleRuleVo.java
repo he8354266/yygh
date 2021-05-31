@@ -24,7 +24,7 @@ public class BookingScheduleRuleVo {
 
 	@ApiModelProperty(value = "可预约日期")
 	@JsonFormat(pattern = "MM月dd日")
-	private Date workDateMd; //方便页面使用
+	private String workDateMd; //方便页面使用
 
 	@ApiModelProperty(value = "周几")
 	private String dayOfWeek;

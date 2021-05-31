@@ -26,7 +26,7 @@ public interface ScheduleService {
     List<Schedule> getDetailSchedule(String hoscode, String depcode, String workDate);
 
     //获取可预约的排班数据
-    Map<String, Object> getBookingScheduleRule(int page, int limit, String hoscode, String depcode);
+    Map<String, Object> getBookingScheduleRule(int page, int limit, String hoscode, String depcode) throws ParseException;
 
     //获取排班id获取排班数据
     Schedule getScheduleId(String scheduleId);

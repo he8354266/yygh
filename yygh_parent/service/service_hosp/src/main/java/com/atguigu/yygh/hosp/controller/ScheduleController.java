@@ -6,6 +6,7 @@ package com.atguigu.yygh.hosp.controller;/**
 
 import com.atguigu.hospital.util.Result;
 import com.atguigu.yygh.hosp.service.ScheduleService;
+import com.atguigu.yygh.model.hosp.Schedule;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,4 +59,22 @@ public class ScheduleController {
         Map<String, Object> ruleSchedule = scheduleService.getRuleSchedule(1, 10, hoscode, depcode);
         return Result.ok(ruleSchedule);
     }
+
+    @GetMapping("detailSchedule/{hoscode}/{depcode}/{workDate}")
+    public Result getDetailSchedule(
+            @PathVariable String hoscode,
+            @PathVariable String depcode, @PathVariable String workDate) throws ParseException {
+        List<Schedule> detailSchedule = scheduleService.getDetailSchedule(hoscode, depcode, workDate);
+        return Result.ok(detailSchedule);
+    }
+
+
+    @GetMapping("bookingScheduleRule/{hoscode}/{depcode}")
+    public Result getBookingScheduleRule(
+            @PathVariable String hoscode,
+            @PathVariable String depcode) throws ParseException {
+        Map<String, Object> bookingScheduleRule = scheduleService.getBookingScheduleRule(1, 10, hoscode, depcode);
+        return Result.ok(bookingScheduleRule);
+    }
+
 }

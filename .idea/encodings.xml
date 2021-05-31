@@ -3,6 +3,12 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/yygh_parent" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/common/common_util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/common/rabbit_util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/common/service_util" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/hospital_manage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service/service_hosp" charset="UTF-8" />
   </component>
 </project>

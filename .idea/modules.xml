@@ -3,7 +3,13 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/yygh_parent/common/common.iml" filepath="$PROJECT_DIR$/yygh_parent/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/common/common_util/common_util.iml" filepath="$PROJECT_DIR$/yygh_parent/common/common_util/common_util.iml" />
       <module fileurl="file://$PROJECT_DIR$/yygh_parent/hospital_manage/hospital_manage.iml" filepath="$PROJECT_DIR$/yygh_parent/hospital_manage/hospital_manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/model/model.iml" filepath="$PROJECT_DIR$/yygh_parent/model/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/common/rabbit_util/rabbit_util.iml" filepath="$PROJECT_DIR$/yygh_parent/common/rabbit_util/rabbit_util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/service/service.iml" filepath="$PROJECT_DIR$/yygh_parent/service/service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/service/service_hosp/service_hosp.iml" filepath="$PROJECT_DIR$/yygh_parent/service/service_hosp/service_hosp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/common/service_util/service_util.iml" filepath="$PROJECT_DIR$/yygh_parent/common/service_util/service_util.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/yygh.iml" filepath="$PROJECT_DIR$/.idea/yygh.iml" />
       <module fileurl="file://$PROJECT_DIR$/yygh_parent/yygh_parent.iml" filepath="$PROJECT_DIR$/yygh_parent/yygh_parent.iml" />
     </modules>

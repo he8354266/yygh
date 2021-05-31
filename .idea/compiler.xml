@@ -6,13 +6,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common" />
+        <module name="common_util" />
         <module name="hospital_manage" />
+        <module name="model" />
+        <module name="rabbit_util" />
+        <module name="service_hosp" />
+        <module name="service_util" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="common" target="1.8" />
+      <module name="common_util" target="1.8" />
       <module name="hospital_manage" target="1.8" />
+      <module name="model" target="1.8" />
+      <module name="rabbit_util" target="1.8" />
+      <module name="service" target="1.8" />
+      <module name="service_hosp" target="1.8" />
+      <module name="service_util" target="1.8" />
       <module name="yygh_parent" target="1.8" />
     </bytecodeTargetLevel>
   </component>
