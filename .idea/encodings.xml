@@ -9,6 +9,10 @@
     <file url="file://$PROJECT_DIR$/yygh_parent/hospital_manage" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/model" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service/service_cmn" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/service/service_hosp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service/service_order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service_client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service_client/service_hosp_client" charset="UTF-8" />
   </component>
 </project>

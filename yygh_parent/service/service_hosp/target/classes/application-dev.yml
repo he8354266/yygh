@@ -1,6 +1,15 @@
 server:
   port: 8201
 spring:
+  rabbitmq:
+      host: 127.0.0.1
+      port: 5672
+      username: guest
+      password: guest
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
   data:
     mongodb:
       uri: mongodb://127.0.0.1:27017/yygh_hosp

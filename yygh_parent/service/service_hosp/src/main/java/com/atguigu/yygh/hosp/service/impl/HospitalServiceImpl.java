@@ -4,6 +4,7 @@ package com.atguigu.yygh.hosp.service.impl;/**
  * @date 2021/5/2810:58
  */
 
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
@@ -14,6 +15,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +42,29 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public void save(Map<String, Object> paramMap) {
+        String mapString = JSONObject.toJSONString(paramMap);
+        Hospital hospital = JSONObject.parseObject(mapString, Hospital.class);
 
+        //判断是否存在数据
+        String hoscode = hospital.getHoscode();
+        Criteria criteria = Criteria.where("hoscode").is(hoscode);
+        Query query = new Query(criteria);
+        Hospital hospitalExist = mongoTemplate.findOne(query, Hospital.class);
+
+        //如果存在，进行修改
+        if (hospitalExist != null) {
+            hospital.setStatus(hospitalExist.getStatus());
+            hospital.setCreateTime(hospitalExist.getCreateTime());
+            hospital.setUpdateTime(new Date());
+            hospital.setIsDeleted(0);
+            mongoTemplate.save(hospital);
+        } else {
+            hospital.setStatus(0);
+            hospital.setCreateTime(new Date());
+            hospital.setUpdateTime(new Date());
+            hospital.setIsDeleted(0);
+            mongoTemplate.save(hospital);
+        }
     }
 
     @Override
@@ -59,11 +84,20 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public void updateStatus(String id, Integer status) {
-
+        //根据id查询医院信息
+        Criteria criteria = Criteria.where("id").is(id);
+        Query query = new Query(criteria);
+        Hospital hospital = mongoTemplate.findOne(query, Hospital.class);
+        //设置修改的值
+        hospital.setStatus(status);
+        hospital.setUpdateTime(new Date());
+        mongoTemplate.save(hospital);
     }
 
     @Override
     public Map<String, Object> getHospById(String id) {
+        Map<String, Object> result = new HashMap<>();
+
         return null;
     }
 

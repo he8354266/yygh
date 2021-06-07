@@ -6,10 +6,13 @@ package com.atguigu.yygh.hosp.service.impl;/**
 
 
 import com.atguigu.hospital.mapper.HospitalSetMapper;
+import com.atguigu.hospital.util.ResultCodeEnum;
+import com.atguigu.hospital.util.YyghException;
 import com.atguigu.yygh.hosp.mapper.HospitalSetCopyMapper;
 import com.atguigu.yygh.hosp.service.HospitalSetService;
 import com.atguigu.yygh.model.hosp.HospitalSetCopy;
 import com.atguigu.yygh.vo.order.SignInfoVo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,12 +35,24 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetCopyMapper, H
 
     @Override
     public String getSignKey(String hoscode) {
-        return null;
+        QueryWrapper<HospitalSetCopy> wrapper = new QueryWrapper<>();
+        wrapper.eq("hoscode", hoscode);
+        HospitalSetCopy hospitalSetCopy = hospitalSetCopyMapper.selectOne(wrapper);
+        return hospitalSetCopy.getSignKey();
     }
 
     @Override
     public SignInfoVo getSignInfoVo(String hoscode) {
-        return null;
+        QueryWrapper<HospitalSetCopy> wrapper = new QueryWrapper<>();
+        wrapper.eq("hoscode", hoscode);
+        HospitalSetCopy hospitalSetCopy = hospitalSetCopyMapper.selectOne(wrapper);
+        if (hospitalSetCopy == null) {
+            throw new YyghException(ResultCodeEnum.HOSPITAL_OPEN);
+        }
+        SignInfoVo signInfoVo = new SignInfoVo();
+        signInfoVo.setApiUrl(hospitalSetCopy.getApiUrl());
+        signInfoVo.setSignKey(hospitalSetCopy.getSignKey());
+        return signInfoVo;
     }
 
     @Override

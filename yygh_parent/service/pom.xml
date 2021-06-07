@@ -14,6 +14,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>service_hosp</module>
+        <module>service_cmn</module>
+        <module>service_order</module>
     </modules>
     <dependencies>
         <dependency>
@@ -54,15 +56,15 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <!-- 服务注册 -->
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-        <!--</dependency>-->
+       <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
         <!-- 流量控制 -->
-        <!-- <dependency>
+       <dependency>
              <groupId>com.alibaba.cloud</groupId>
              <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-         </dependency>-->
+         </dependency>
     </dependencies>
     <build>
         <plugins>

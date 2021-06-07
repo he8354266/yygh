@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: hospital-cmn
+  profiles:
+    active: dev
