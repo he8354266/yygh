@@ -5,6 +5,8 @@ package com.atguigu.yygh.hosp.service.impl;/**
  */
 
 import com.alibaba.fastjson.JSONObject;
+import com.atguigu.yygh.cmn.client.DictFeignClient;
+import com.atguigu.yygh.hosp.repository.HospitalRepository;
 import com.atguigu.yygh.hosp.service.HospitalService;
 import com.atguigu.yygh.model.hosp.Hospital;
 import com.atguigu.yygh.vo.hosp.HospitalQueryVo;
@@ -34,6 +36,10 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Autowired
     private MongoTemplate mongoTemplate = null;
+    @Autowired
+    private HospitalRepository hospitalRepository = null;
+    @Autowired
+    private DictFeignClient dictFeignClient = null;
 
     private Query getQuery(Criteria criteria) {
         Query query = new Query(criteria);
@@ -97,8 +103,11 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public Map<String, Object> getHospById(String id) {
         Map<String, Object> result = new HashMap<>();
-
-        return null;
+        Hospital hospital = this.setHospitalHosType(hospitalRepository.findById(id).get());
+        result.put("hospital", hospital);
+        result.put("bookingRule", hospital.getBookingRule());
+        hospital.setBookingRule(null);
+        return result;
     }
 
     @Override
@@ -113,11 +122,33 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public List<Hospital> findByHosname(String hosname) {
-        return null;
+        return hospitalRepository.findHospitalByHosnameLike(hosname);
     }
 
     @Override
     public Map<String, Object> item(String hoscode) {
-        return null;
+        Map<String, Object> result = new HashMap<>();
+        //医院详情
+        Hospital hospital = this.setHospitalHosType(this.getByHoscode(hoscode));
+        result.put("hospital", hospital);
+        //预约规则
+        result.put("bookingRule", hospital.getBookingRule());
+        hospital.setBookingRule(null);
+        return result;
+    }
+
+    //获取查询list集合，遍历进行医院等级封装
+    private Hospital setHospitalHosType(Hospital hospital) {
+        //根据dictCode和value获取医院等级名称
+        String hostypeString = dictFeignClient.getName("Hostype", hospital.getHostype());
+        //查询省市区
+        String provinceString = dictFeignClient.getName(hospital.getProvinceCode());
+        String cityString = dictFeignClient.getName(hospital.getCityCode());
+        String districtString = dictFeignClient.getName(hospital.getDistrictCode());
+
+
+        hospital.getParam().put("fullAddress", provinceString + cityString + districtString);
+        hospital.getParam().put("hostypeString", hostypeString);
+        return hospital;
     }
 }

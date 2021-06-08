@@ -5,6 +5,7 @@ package com.atguigu.yygh.order.services.impl;/**
  */
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.atguigu.common.rabbit.service.RabbitService;
 import com.atguigu.yygh.common.result.ResultCodeEnum;
 import com.atguigu.yygh.enums.OrderStatusEnum;
@@ -13,9 +14,8 @@ import com.atguigu.yygh.model.order.OrderInfo;
 import com.atguigu.yygh.order.constant.MqConst;
 import com.atguigu.yygh.order.mapper.OrderMapper;
 import com.atguigu.yygh.order.services.OrderService;
-import com.atguigu.yygh.vo.order.OrderCountQueryVo;
-import com.atguigu.yygh.vo.order.OrderQueryVo;
-import com.atguigu.yygh.vo.order.SignInfoVo;
+import com.atguigu.yygh.vo.msm.MsmVo;
+import com.atguigu.yygh.vo.order.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -29,7 +29,10 @@ import com.atguigu.yygh.common.exception.YyghException;
 import com.atguigu.yygh.common.helper.HttpRequestHelper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author zkjyCoding
@@ -115,17 +118,76 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderInfo> implem
 
         String sign = HttpRequestHelper.getSign(reqMap, signInfoVo.getSignKey());
         reqMap.put("sign", sign);
-        return null;
+
+
+        JSONObject result = HttpRequestHelper.sendRequest(reqMap, signInfoVo.getApiUrl() + "/order/updateCancelStatus");
+        if (result.getInteger("code") != 200) {
+            throw new YyghException(result.getString("message"), ResultCodeEnum.FAIL.getCode());
+        } else {
+            //判断当前订单是否可以取消
+//            if (orderInfo.getOrderStatus().intValue() == OrderStatusEnum.PAID.getStatus().intValue()) {
+//
+//            }
+            //更新订单状态
+            orderInfo.setOrderStatus(OrderStatusEnum.CANCLE.getStatus());
+            baseMapper.updateById(orderInfo);
+
+            //发送mq更新预约数量
+            OrderMqVo orderMqVo = new OrderMqVo();
+            orderMqVo.setScheduleId(orderInfo.getScheduleId());
+            //短信提示
+            MsmVo msmVo = new MsmVo();
+            msmVo.setPhone(orderInfo.getPatientPhone());
+            String reserveDate = new DateTime(orderInfo.getReserveDate()).toString();
+            Map<String, Object> param = new HashMap<String, Object>() {{
+                put("title", orderInfo.getHosname() + "|" + orderInfo.getDepname() + "|" + orderInfo.getTitle());
+                put("reserveDate", reserveDate);
+                put("name", orderInfo.getPatientName());
+            }};
+            msmVo.setParam(param);
+            orderMqVo.setMsmVo(msmVo);
+            rabbitTemplate.convertAndSend(MqConst.EXCHANGE_DIRECT_ORDER, MqConst.ROUTING_ORDER, orderMqVo);
+
+
+        }
+        return true;
     }
 
+    //就诊通知
     @Override
     public void patientTips() {
-
+        QueryWrapper<OrderInfo> wrapper = new QueryWrapper<>();
+        wrapper.eq("reserve_date", new DateTime().toString("yyyy-MM-dd"));
+        wrapper.eq("order_status", OrderStatusEnum.CANCLE.getStatus());
+        List<OrderInfo> orderInfoList = baseMapper.selectList(wrapper);
+        for (OrderInfo orderInfo : orderInfoList) {
+            //短信提示
+            MsmVo msmVo = new MsmVo();
+            msmVo.setPhone(orderInfo.getPatientPhone());
+            String reserveDate = new DateTime(orderInfo.getReserveDate()).toString("yyyy-MM-dd") + (orderInfo.getReserveTime() == 0 ? "上午" : "下午");
+            Map<String, Object> param = new HashMap<String, Object>() {{
+                put("title", orderInfo.getHosname() + "|" + orderInfo.getDepname() + "|" + orderInfo.getTitle());
+                put("reserveDate", reserveDate);
+                put("name", orderInfo.getPatientName());
+            }};
+            msmVo.setParam(param);
+            rabbitTemplate.convertAndSend(MqConst.EXCHANGE_DIRECT_MSM, MqConst.ROUTING_MSM_ITEM, msmVo);
+        }
     }
 
     @Override
     public Map<String, Object> getCountMap(OrderCountQueryVo orderCountQueryVo) {
-        return null;
+        //调用mapper方法得到数据
+        List<OrderCountVo> orderCountVoList = baseMapper.selectOrderCount(orderCountQueryVo);
+
+        List<String> dateList = orderCountVoList.stream().map(OrderCountVo::getReserveDate).collect(Collectors.toList());
+
+        List<Integer> countList = orderCountVoList.stream().map(OrderCountVo::getCount).collect(Collectors.toList());
+        Map<String, Object> map = new HashMap<String, Object>() {{
+            put("dateList", dateList);
+            put("countList", countList);
+        }};
+        return map;
     }
 
     private OrderInfo packOrderInfo(OrderInfo orderInfo) {

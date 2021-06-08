@@ -73,6 +73,7 @@
     <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:2.7.0" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.10.1" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.13" level="project" />
+    <orderEntry type="module" module-name="service_cmn_client" />
     <orderEntry type="module" module-name="model" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.2.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-json:2.2.1.RELEASE" level="project" />

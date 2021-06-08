@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: service-msm
+  profiles:
+    active: dev
+aliyun:
+  sms:
+    regionId: default
+    accessKeyId: LTAI4G4SV6WtST7UYH776b64
+    secret: X9KHNYgztNr9MI5Zp8JffQPZO4uJo5
