@@ -15,6 +15,8 @@
       <module fileurl="file://$PROJECT_DIR$/yygh_parent/service_client/service_hosp_client/service_hosp_client.iml" filepath="$PROJECT_DIR$/yygh_parent/service_client/service_hosp_client/service_hosp_client.iml" />
       <module fileurl="file://$PROJECT_DIR$/yygh_parent/service/service_msm/service_msm.iml" filepath="$PROJECT_DIR$/yygh_parent/service/service_msm/service_msm.iml" />
       <module fileurl="file://$PROJECT_DIR$/yygh_parent/service/service_order/service_order.iml" filepath="$PROJECT_DIR$/yygh_parent/service/service_order/service_order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/service/service_oss/service_oss.iml" filepath="$PROJECT_DIR$/yygh_parent/service/service_oss/service_oss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yygh_parent/service/service_task/service_task.iml" filepath="$PROJECT_DIR$/yygh_parent/service/service_task/service_task.iml" />
       <module fileurl="file://$PROJECT_DIR$/yygh_parent/common/service_util/service_util.iml" filepath="$PROJECT_DIR$/yygh_parent/common/service_util/service_util.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/yygh.iml" filepath="$PROJECT_DIR$/.idea/yygh.iml" />
       <module fileurl="file://$PROJECT_DIR$/yygh_parent/yygh_parent.iml" filepath="$PROJECT_DIR$/yygh_parent/yygh_parent.iml" />

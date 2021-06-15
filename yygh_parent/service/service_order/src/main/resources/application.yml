@@ -3,8 +3,3 @@ spring:
     name: hospital-order
   profiles:
     active: dev
-wexin:
-  appid: wx74862e0dfcf69954
-  partner: 1558950191
-  partnerkey: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
-  cert: E:\cert\apiclient_cert.p12

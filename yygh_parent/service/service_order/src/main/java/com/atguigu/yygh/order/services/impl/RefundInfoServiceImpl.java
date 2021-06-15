@@ -10,6 +10,7 @@ import com.atguigu.yygh.order.mapper.RefundInfoMapper;
 import com.atguigu.yygh.order.services.RefundInfoService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
@@ -22,6 +23,7 @@ import java.util.Date;
  * @createDate 2021/6/8 17:00
  * @updateDate 2021/6/8 17:00
  **/
+@Service
 public class RefundInfoServiceImpl extends ServiceImpl<RefundInfoMapper, RefundInfo> implements RefundInfoService {
     //保存退款记录
     @Override
