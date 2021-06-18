@@ -9,6 +9,7 @@ import com.atguigu.yygh.common.utils.AuthContextHolder;
 import com.atguigu.yygh.enums.OrderStatusEnum;
 import com.atguigu.yygh.model.order.OrderInfo;
 import com.atguigu.yygh.order.services.OrderService;
+import com.atguigu.yygh.vo.order.OrderCountQueryVo;
 import com.atguigu.yygh.vo.order.OrderQueryVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @author zkjyCoding
@@ -63,5 +65,17 @@ public class OrderApiController {
     @GetMapping("auth/getStatusList")
     public Result getStatusList() {
         return Result.ok(OrderStatusEnum.getStatusList());
+    }
+
+    //取消预约
+    @GetMapping("auth/cancelOrder/{orderId}")
+    public Result cancelOrder(@PathVariable Long orderId) {
+        Boolean isOrder = orderService.cancelOrder(orderId);
+        return Result.ok(isOrder);
+    }
+
+    @PostMapping("inner/getCountMap")
+    public Map<String, Object> getCountMap(@RequestBody OrderCountQueryVo orderCountQueryVo) {
+        return orderService.getCountMap(orderCountQueryVo);
     }
 }

@@ -9,6 +9,11 @@
         <option value="$PROJECT_DIR$/yygh_parent/service/pom.xml" />
         <option value="$PROJECT_DIR$/yygh_parent/service/service_cmn/pom.xml" />
         <option value="$PROJECT_DIR$/yygh_parent/service/service_hosp/pom.xml" />
+        <option value="$PROJECT_DIR$/yygh_parent/service/service_statistics/pom.xml" />
+        <option value="$PROJECT_DIR$/yygh_parent/service/service_order/pom.xml" />
+        <option value="$PROJECT_DIR$/yygh_parent/service/service_msm/pom.xml" />
+        <option value="$PROJECT_DIR$/yygh_parent/service/service_task/pom.xml" />
+        <option value="$PROJECT_DIR$/yygh_parent/service/service_user/pom.xml" />
       </list>
     </option>
   </component>

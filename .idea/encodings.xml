@@ -14,9 +14,12 @@
     <file url="file://$PROJECT_DIR$/yygh_parent/service/service_msm" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/service/service_order" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/service/service_oss" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service/service_statistics" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/service/service_task" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service/service_user" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/service_client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/service_client/service_cmn_client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/yygh_parent/service_client/service_hosp_client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yygh_parent/service_client/service_order_client" charset="UTF-8" />
   </component>
 </project>
