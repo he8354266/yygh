@@ -123,7 +123,7 @@ public class HospitalSetController {
             return Result.fail();
         }
     }
-
+    //7 批量删除医院设置
     @DeleteMapping("batchRemove")
     public Result batchRemoveHospitalSet(@RequestBody List<Long> idList) {
         boolean flag = hospitalSetService.removeByIds(idList);
@@ -133,7 +133,7 @@ public class HospitalSetController {
             return Result.fail();
         }
     }
-
+    //8 医院设置锁定和解锁
     @PutMapping("lockHospitalSet/{id}/{status}")
     public Result lockHospitalSet(@PathVariable Long id,
                                   @PathVariable Integer status) {
@@ -144,7 +144,7 @@ public class HospitalSetController {
         hospitalSetService.updateById(hospitalSetCopy);
         return Result.ok();
     }
-
+    //9 发送签名秘钥
     @PostMapping("sendKey/{id}")
     public Result lockHospitalSet(@PathVariable Long id) {
         HospitalSetCopy hospitalSet = hospitalSetService.getById(id);

@@ -21,7 +21,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @updateDate 2021/5/25 9:49
  **/
 @SpringBootApplication
-@ComponentScan(basePackages = "com.atguigu")
+@ComponentScan(basePackages = "com.atguigu.yygh.hosp")
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "com.atguigu")
 public class ServiceHospApplication {
