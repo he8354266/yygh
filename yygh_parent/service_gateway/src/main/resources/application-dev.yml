@@ -1,0 +1,47 @@
+server:
+  port: 80
+spring:
+  rabbitmq:
+      host: 127.0.0.1
+      port: 5672
+      username: guest
+      password: guest
+  cloud:
+    gateway:
+      routes[0]:
+        id: service-hosp
+        uri: lb://service-hosp
+        predicates: Path=/*/hosp/**
+      routes[1]:
+        id: service-cmn
+        uri: lb://service-cmn
+        predicates: Path=/*/cmn/**
+      routes[2]:
+        id: service-user
+        uri: lb://service-user
+        predicates: Path=/*/user/**
+      routes[3]:
+        id: service-msm
+        uri: lb://service-msm
+        predicates: Path=/*/msm/**
+      routes[4]:
+        id: service-user
+        uri: lb://service-user
+        predicates: Path=/*/ucenter/**
+      routes[5]:
+        id: service-oss
+        uri: lb://service-oss
+        predicates: Path=/*/oss/**
+      routes[6]:
+        id: service-order
+        uri: lb://service-order
+        predicates: Path=/*/order/**
+      routes[7]:
+        id: service-statistics
+        uri: lb://service-statistics
+        predicates: Path=/*/statistics/**
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        locator:
+          enabled: true

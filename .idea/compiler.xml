@@ -12,6 +12,7 @@
         <module name="rabbit_util" />
         <module name="service_cmn" />
         <module name="service_cmn_client" />
+        <module name="service_gateway" />
         <module name="service_hosp" />
         <module name="service_hosp_client" />
         <module name="service_msm" />
@@ -21,6 +22,7 @@
         <module name="service_statistics" />
         <module name="service_task" />
         <module name="service_user" />
+        <module name="service_user_client" />
         <module name="service_util" />
       </profile>
     </annotationProcessing>
@@ -34,6 +36,7 @@
       <module name="service_client" target="1.8" />
       <module name="service_cmn" target="1.8" />
       <module name="service_cmn_client" target="1.8" />
+      <module name="service_gateway" target="1.8" />
       <module name="service_hosp" target="1.8" />
       <module name="service_hosp_client" target="1.8" />
       <module name="service_msm" target="1.8" />
@@ -43,6 +46,7 @@
       <module name="service_statistics" target="1.8" />
       <module name="service_task" target="1.8" />
       <module name="service_user" target="1.8" />
+      <module name="service_user_client" target="1.8" />
       <module name="service_util" target="1.8" />
       <module name="yygh_parent" target="1.8" />
     </bytecodeTargetLevel>
